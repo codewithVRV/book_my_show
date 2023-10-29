@@ -1,6 +1,7 @@
+import './Navbar.css'
+
 import Logo from '../../Assets/logo.png'
 import DummyProfileImage from '../../Assets/user.png'
-
 function Navbar () {
     return (
         <>
