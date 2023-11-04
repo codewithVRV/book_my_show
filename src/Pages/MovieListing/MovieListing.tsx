@@ -1,12 +1,23 @@
-import ShowTimingCard from "../../Components/ShowTimingCard/ShowTimingCard"
-import TheatreNameCard from "../../Components/TheatreNameCard/TheatreNameCard"
 import HomeLayout from "../../Layouts/HomeLayout"
 
 function MovieListing () {
     return (
         <HomeLayout>
-            <ShowTimingCard />
-            <TheatreNameCard />
+            
+            <div className="min-h-[80-vh] bg-slate-300">
+                <div className="bg-[#333545] text-white">
+                    <div className="font-light text-7xl pt-8 pb-6 w-[80vw] mx-auto">
+                        12th Fail
+
+
+                        <div className="flex gap-3 mt-6">
+                            <button className="btn btn-xs text-sm border-2 border-white bg-transparent text-white hover:bg-transparent">Drama</button>
+                            <button className="btn btn-xs text-sm border-2 border-white bg-transparent text-white hover:bg-transparent">Biography</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </HomeLayout>
     )
 }
