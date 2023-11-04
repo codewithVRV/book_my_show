@@ -2,13 +2,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import IccBannerImage from '../../Assets/banner.avif'
-import MovieCardImage from '../../Assets/movieCardImage.png'
 import HomeBanner from '../../Components/HomeBanner/HomeBanner';
 import HomeCarosel from "../../Components/HomeCarosel/HomeCarosel";
 import HomeFooter from '../../Components/HomeFooter/HomeFooter';
 import HomeMovieCard from "../../Components/HomeMovieCard/HomeMovieCard";
-import Navbar from "../../Components/Navbar/Navbar"
 import axiosInstance from '../../Config/AxiosInstance';
+import HomeLayout from '../../Layouts/HomeLayout';
 import Movie from '../../Types/Movie';
 
 
@@ -47,9 +46,8 @@ function Home () {
     }, [])
     return (
         
-        <>
+        <HomeLayout>
 
-            <Navbar />
             <HomeCarosel />
             <div className="min-h-[66rem] w-[80vw] mx-auto flex flex-col">
                 <HomeBanner image={IccBannerImage} />
@@ -68,7 +66,7 @@ function Home () {
 
             </div>
             <HomeFooter />
-        </>
+        </HomeLayout>
     )
 }
 
