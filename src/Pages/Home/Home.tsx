@@ -31,7 +31,7 @@ function Home () {
                     poster: movie.poster
                 }
             })
-            console.log(movieData)
+            // console.log(movieData)
             setMoviePoster(movieData)
 
         }
@@ -57,11 +57,7 @@ function Home () {
                     Recommended Movies
                 </div>
                 <div className="mt-8 flex  flex-col lg:flex-row justify-center items-center gap-4">
-                    {/* <HomeMovieCard movieImage={MovieCardImage} />
-                    <HomeMovieCard movieImage={MovieCardImage} />
-                    <HomeMovieCard movieImage={MovieCardImage} />
-                    <HomeMovieCard movieImage={MovieCardImage} />
-                    <HomeMovieCard movieImage={MovieCardImage} /> */}
+              
                     {
                         moviePoster && moviePoster.map((movie) => (
                             <HomeMovieCard movieImage={movie.poster} />
