@@ -34,7 +34,26 @@ function Navbar () {
                 </ul>
                 </div>
             </div>
+            
         </div>
+        <div className="text-white bg-[#22232d]">
+                <div className='flex gap-4 w-[80vw] mx-auto py-2'>
+                    <div>
+                        Movies
+                    </div>
+                    <div>
+                        Events
+                    </div>
+                    <div>
+                        Stream
+                    </div>
+                    <div>
+                        Plays
+                    </div>
+                </div>
+                
+            </div>
+
 
         </>
     )
