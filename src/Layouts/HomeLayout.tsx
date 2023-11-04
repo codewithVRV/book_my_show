@@ -1,4 +1,5 @@
 
+import HomeFooter from "../Components/HomeFooter/HomeFooter";
 import Navbar from "../Components/Navbar/Navbar";
 import ReactNode from "../Types/ReactNode";
 
@@ -7,6 +8,7 @@ function HomeLayout({children}:{children: ReactNode}) {
         <>
             <Navbar />
             {children}
+            <HomeFooter />
         </>
     )
 }
