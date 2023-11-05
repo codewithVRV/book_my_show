@@ -6,7 +6,7 @@ import HomeBanner from '../../Components/HomeBanner/HomeBanner';
 import HomeCarosel from "../../Components/HomeCarosel/HomeCarosel";
 import HomeFooter from '../../Components/HomeFooter/HomeFooter';
 import HomeMovieCard from "../../Components/HomeMovieCard/HomeMovieCard";
-import axiosInstance from '../../Config/AxiosInstance';
+// import axiosInstance from '../../Config/AxiosInstance';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Movie from '../../Types/Movie';
 
@@ -14,23 +14,23 @@ import Movie from '../../Types/Movie';
 type MoviePoster = [{
     id: string,
     poster: string,
+    name: string,
 }] | []
 function Home () {
 
-    const [moviePoster, setMoviePoster] = useState<MoviePoster>([{id: "", poster: ""}])
+    const [moviePoster, setMoviePoster] = useState<MoviePoster>([{id: "", poster: "", name: ""}])
 
     async function fetchMovies () {
         try {
             const resposne = await axios.get('https://mbaservice.onrender.com/mba/api/v1/movies')
-            // const resposne = await axiosInstance.get('/mba/api/v1/movies')
-            // console.log(resposne.data.data)
+            
             const movieData = resposne.data.data.map((movie : Movie) => {
                 return {
                     id: movie._id,
-                    poster: movie.poster
+                    poster: movie.poster,
+                    name: movie.name,
                 }
             })
-            // console.log(movieData)
             setMoviePoster(movieData)
 
         }
@@ -38,7 +38,7 @@ function Home () {
             console.log("Error From HomePage", error)
         }
     }
-    console.log(axiosInstance)
+    // console.log(moviePoster)
 
 
     useEffect(() => {
@@ -58,7 +58,9 @@ function Home () {
               
                     {
                         moviePoster && moviePoster.map((movie) => (
-                            <HomeMovieCard movieImage={movie.poster} />
+                            <HomeMovieCard key={movie.id} 
+                            movieId={movie.id} movieName={movie.name}
+                            movieImage={movie.poster} />
                         ))
                     }
            
