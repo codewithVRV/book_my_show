@@ -37,7 +37,6 @@ function Home () {
             console.log("Error From HomePage", error)
         }
     }
-    console.log(import.meta.env.VITE_BASE_URL)
 
 
     useEffect(() => {

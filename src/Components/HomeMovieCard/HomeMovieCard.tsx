@@ -15,7 +15,7 @@ function HomeMovieCard ({movieImage, movieId, movieName} : HomeMovieCardProps) {
 
     }
     return (
-        <div onClick={navigateToMovieListing} className="flex flex-col items-center justify-center h-[450px] w-[265px] lg:h-[416px] lg:w-[222px]">
+        <div onClick={navigateToMovieListing} className="flex flex-col items-center cursor-pointer justify-center h-[450px] w-[265px] lg:h-[416px] lg:w-[222px]">
             <img 
                 src={movieImage} 
                 className="h-[95%] w-full rounded-tl-lg rounded-tr-lg"

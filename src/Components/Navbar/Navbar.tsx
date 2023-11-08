@@ -1,14 +1,21 @@
 import './Navbar.css'
 
+import { useNavigate } from 'react-router-dom'
+
 import Logo from '../../Assets/logo.png'
 import DummyProfileImage from '../../Assets/user.png'
 function Navbar () {
+    const navigator = useNavigate()
+
+    function returnToHomePage() {
+        navigator('/')
+    }
     return (
         <>
             <div className="navbar bg-[#333545]">
             <div className="flex-1">
                 <div className='h-12 mr-8'>
-                    <img className="h-[100%] w-36" src={Logo} />
+                    <img onClick={returnToHomePage} className="h-[100%] w-36" src={Logo} />
                 </div>
                 <div className="form-control hidden lg:block lg:w-96">
                     <input type="text" placeholder="Search" className="input input-bordered md:w-full" />
