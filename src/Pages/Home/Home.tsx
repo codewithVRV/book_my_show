@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import IccBannerImage from '../../Assets/banner.avif'
@@ -7,7 +6,6 @@ import HomeCarosel from "../../Components/HomeCarosel/HomeCarosel";
 import HomeFooter from '../../Components/HomeFooter/HomeFooter';
 import HomeMovieCard from "../../Components/HomeMovieCard/HomeMovieCard";
 import axiosInstance from '../../Config/AxiosInstance';
-// import axiosInstance from '../../Config/AxiosInstance';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Movie from '../../Types/Movie';
 
@@ -23,10 +21,9 @@ function Home () {
 
     async function fetchMovies () {
         try {
-            const resposne = await axios.get('http://localhost:3000/mba/api/v1/movies')
-            // const response = await axiosInstance.get(`mba/api/v1/movies`)
+            const response = await axiosInstance.get(`mba/api/v1/movies`)
             
-            const movieData = resposne.data.data.map((movie : Movie) => {
+            const movieData = response.data.data.map((movie : Movie) => {
                 return {
                     id: movie._id,
                     poster: movie.poster,
@@ -40,7 +37,7 @@ function Home () {
             console.log("Error From HomePage", error)
         }
     }
-    // console.log(moviePoster)
+    console.log(import.meta.env.VITE_BASE_URL)
 
 
     useEffect(() => {

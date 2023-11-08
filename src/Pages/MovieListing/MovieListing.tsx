@@ -1,8 +1,8 @@
-import axios from 'axios';
 import {useEffect, useState} from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 
 import TheatreShowCard from "../../Components/TheatreShowCard/TheatreShowCard";
+import axiosInstance from '../../Config/AxiosInstance';
 import HomeLayout from "../../Layouts/HomeLayout"
 
 type MovieShows = {
@@ -64,10 +64,9 @@ function MovieListing () {
 
     async function fetchShowDetails(){
         try{
-            const resposne = await axios.get(`http://localhost:3000/mba/api/v1/shows?movieId=${state.movieId}`)
+            const response = await axiosInstance.get(`mba/api/v1/shows?movieId=${state.movieId}`)
 
-            console.log(resposne.data.data)
-            const shows = resposne.data.data;
+            const shows = response.data.data;
             const showState : TheatreState = {}
             shows.map((show: show) => {
                 if(show.theatreId._id in showState){
@@ -93,7 +92,7 @@ function MovieListing () {
                     }
                 }
             })
-            console.log(showState)
+            // console.log(showState)
             setTheatreData(showState)
     
         }
