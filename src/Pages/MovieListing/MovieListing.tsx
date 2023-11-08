@@ -128,10 +128,12 @@ function MovieListing () {
 
                 <div className="bg-slate-300 mt-4 w-[100vw]">
                     <div className="w-[80vw] mx-auto rounded-xl bg-[#FFFFFF]">
-                        <TheatreShowCard num={8}/>
-                        <TheatreShowCard num={7}/>
+                        {theatreData && Object.keys(theatreData).map((theatreId:string) => {
+                           return <TheatreShowCard shows={theatreData[theatreId].shows} key={theatreId} name={theatreData[theatreId].theatreName}/>
+                        })} 
+                        {/* <TheatreShowCard num={7}/>
                         <TheatreShowCard num={14}/>
-                        <TheatreShowCard num={1}/>
+                        <TheatreShowCard num={1}/> */}
                     </div>
                     
                 </div>
