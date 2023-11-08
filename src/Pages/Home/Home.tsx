@@ -6,6 +6,7 @@ import HomeBanner from '../../Components/HomeBanner/HomeBanner';
 import HomeCarosel from "../../Components/HomeCarosel/HomeCarosel";
 import HomeFooter from '../../Components/HomeFooter/HomeFooter';
 import HomeMovieCard from "../../Components/HomeMovieCard/HomeMovieCard";
+import axiosInstance from '../../Config/AxiosInstance';
 // import axiosInstance from '../../Config/AxiosInstance';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Movie from '../../Types/Movie';
@@ -22,7 +23,8 @@ function Home () {
 
     async function fetchMovies () {
         try {
-            const resposne = await axios.get('https://mbaservice.onrender.com/mba/api/v1/movies')
+            const resposne = await axios.get('http://localhost:3000/mba/api/v1/movies')
+            // const response = await axiosInstance.get(`mba/api/v1/movies`)
             
             const movieData = resposne.data.data.map((movie : Movie) => {
                 return {
