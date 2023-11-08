@@ -47,7 +47,7 @@ function Home () {
         <HomeLayout>
 
             <HomeCarosel />
-            <div className="min-h-[66rem] w-[80vw] mx-auto flex flex-col">
+            {/* <div className="min-h-[66rem] w-[80vw] mx-auto flex flex-col">
                 <HomeBanner image={IccBannerImage} />
                 <div className='text-2xl font-semibold text-black mt-4'>
                     Recommended Movies
@@ -63,6 +63,33 @@ function Home () {
                     }
            
                 </div>
+
+            </div> */}
+            <div className="min-h-[66rem] w-[80vw] mx-auto flex flex-col">
+                <HomeBanner image={IccBannerImage} />
+                <div className='text-2xl font-semibold text-black mt-4'>
+                    Recommended Movies
+                </div>
+                <div className="carousel w-full">
+                <div id="slide1" className="carousel-item relative w-full">
+                    <div className="mt-8 flex  flex-col lg:flex-row justify-center items-center gap-4">
+              
+                        {
+                            moviePoster && moviePoster.map((movie) => (
+                                <HomeMovieCard key={movie.id} 
+                                movieId={movie.id} movieName={movie.name}
+                                movieImage={movie.poster} />
+                            ))
+                        }
+            
+                    </div>
+                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                    <a href="#slide4" className="btn btn-circle">❮</a> 
+                    <a href="#slide2" className="btn btn-circle">❯</a>
+                    </div>
+                </div> 
+            
+            </div>
 
             </div>
             <HomeFooter />
