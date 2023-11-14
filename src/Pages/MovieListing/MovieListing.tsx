@@ -11,6 +11,7 @@ type MovieShows = {
     format: string,
     price: number,
     noOfSeats: number,
+    seatConfiguration: string,
 }
 
 
@@ -44,6 +45,7 @@ type show = {
     _v: number,
     _id: string,
     theatreId: theatre,
+    seatConfiguration: string,
 }
 
 
@@ -61,12 +63,14 @@ function MovieListing () {
 
     const [theatreData, setTheatreData] = useState<TheatreState>({})
   
+    // console.log(theatreData)
 
     async function fetchShowDetails(){
         try{
             const response = await axiosInstance.get(`mba/api/v1/shows?movieId=${state.movieId}`)
 
             const shows = response.data.data;
+            // console.log(shows)
             const showState : TheatreState = {}
             shows.map((show: show) => {
                 if(show.theatreId._id in showState){
@@ -75,7 +79,8 @@ function MovieListing () {
                             timing: show.timing,
                             format: show.format,
                             price: show.price,
-                            noOfSeats: show.noOfSeats
+                            noOfSeats: show.noOfSeats,
+                            seatConfiguration: show.seatConfiguration ? show.seatConfiguration : ""
                     })
                 }
                 else{
@@ -87,7 +92,8 @@ function MovieListing () {
                             timing: show.timing,
                             format: show.format,
                             price: show.price,
-                            noOfSeats: show.noOfSeats
+                            noOfSeats: show.noOfSeats,
+                            seatConfiguration: show.seatConfiguration ? show.seatConfiguration : ""
                         }]
                     }
                 }
