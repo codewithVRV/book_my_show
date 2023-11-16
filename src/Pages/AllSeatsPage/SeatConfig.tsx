@@ -29,7 +29,27 @@ function SeatConfig () {
     }, [])
     return (
         <HomeLayout>
-            <h1>AllSeatsPage Here{seats.length}</h1>
+            {/* <h1>AllSeatsPage Here{seats.length}</h1> */}
+            <div className='flex flex-col items-center justify-center p-16'>
+                {
+                    seats.map((row: Row) => {
+                        return (
+                            <div className='flex gap-8'> 
+                                <div>{row.number}</div>
+                                <div className='flex gap-4'>
+                                    {
+                                        row.seats.map((seat:Seat) => {
+                                            return (
+                                                <div>{seat.number}</div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </HomeLayout>
     )
 }

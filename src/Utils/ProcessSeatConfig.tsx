@@ -6,3 +6,5 @@ function processSeatConfig(config : string){
 }
 
 export default processSeatConfig;
+
+
