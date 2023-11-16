@@ -1,22 +1,18 @@
 import { useNavigate } from "react-router-dom";
 
-function processSeatConfig(config){
-    if(config) {
-        return JSON.parse(config.replaceAll("'", '"'))
-    }
-    return undefined;
-}
-function ShowTimingCard ({timing, format, price, config}: {timing:string, format: string, price: number, config: string}) {
-    // console.log(config)
-    const navigator = useNavigate()
-    const seatConfigurationData = processSeatConfig(config)
-    // console.log(seatConfigurationData)
+// import processSeatConfig from "../../Utils/ProcessSeatConfig";
 
-    function goToAllSeats () {
-        navigator('/movie/seats')
+
+function ShowTimingCard ({timing, format, price, config}: {timing:string, format: string, price: number, config: string}) {
+    const navigator = useNavigate()
+    // const seatConfigurationData = processSeatConfig(config)
+
+    function onShowSelection () {
+        if(config)
+            navigator('/movie/seatSelection', {state: {config}})
     }
     return (
-        seatConfigurationData && <div onClick={goToAllSeats} className="cursor-pointer mx-2 my-2 group relative w-32 py-1 px-2 flex flex-col items-center justify-center text-sm text-green-400 rounded-lg border border-black">
+        <div onClick={onShowSelection} className="cursor-pointer mx-2 my-2 group relative w-32 py-1 px-2 flex flex-col items-center justify-center text-sm text-green-400 rounded-lg border border-black">
             <div>
                 {timing}
             </div>
