@@ -1,7 +1,8 @@
 // import { useLocation } from "react-router-dom";
 
 import {useEffect, useState} from 'react'
-import { useLocation } from "react-router-dom";
+import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from "react-router-dom";
 
 import axiosInstance from '../../Config/AxiosInstance';
 import HomeLayout from "../../Layouts/HomeLayout";
@@ -28,11 +29,12 @@ type SelectedSeat = {
 
 function SeatConfig () {
     const {state} = useLocation()
+    const navigator = useNavigate()
     console.log(state)
     console.log(state.showId)
     const [seats, setSeats] = useState<SeatState>([{number: "", seats : [{number: 0, status: 0}]}])
 
-    function onBooking () {
+    async function onBooking () {
         // console.log(seats)
         const selectedSeats: SelectedSeat[]  = [];
         seats.forEach((row:Row) => {
@@ -45,7 +47,7 @@ function SeatConfig () {
         })
         // console.log(selectedSeats)
         const seatsJson = JSON.stringify(selectedSeats).replaceAll('"', "'")
-        axiosInstance.post('/mba/api/v1/bookings', {
+        const response = await axiosInstance.post('/mba/api/v1/bookings', {
             seat: seatsJson,
             movieId: state.movieId,
             theatreId: state.theatreId,
@@ -58,6 +60,11 @@ function SeatConfig () {
                 'x-access-token' : import.meta.env.VITE_ACCESS_TOKEN,
             }
         })
+        console.log(response.data)
+        const showId = state.showId;
+        // response.data.message use this message in react hot toast
+        toast(response.data.message)
+        if(response.data.success) navigator("/bookings", {state: {booking: response.data, showId: showId}})
     }
     function processSeatColor(seat: Seat) {
         if(seat.status == 0) return '';
@@ -102,15 +109,15 @@ function SeatConfig () {
                             <div>{row.number}</div>
 
                             <div className="flex gap-2 my-2 mx-1">
-                                {row.seats.map((seat: Seat) => {
+                                {row.seats.map((seat: Seat, idx: number) => {
 
                                     return (
                                             seat.status == 0 ? 
                                                 (
-                                                <div className="h-[2rem] w-[2rem]"></div>
+                                                <div key={`${row.number}-${seat.number}-${idx}`} className="h-[2rem] w-[2rem]"></div>
                                                 ) : 
                                                 (
-                                                    <div key={`${row.number}-${seat.number}`} onClick={() => processSeatSelection(`${row.number}-${seat.number}`)} className={`${processSeatColor(seat)} px-3 py-1 h-[2rem] w-[2rem]`}>
+                                                    <div key={`${row.number}-${seat.number}-${idx}`} onClick={() => processSeatSelection(`${row.number}-${seat.number}`)} className={`${processSeatColor(seat)} px-3 py-1 h-[2rem] w-[2rem]`}>
                                                         {seat.number}
                                                     </div>
                                                 )
