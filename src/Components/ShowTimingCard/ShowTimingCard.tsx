@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 // import processSeatConfig from "../../Utils/ProcessSeatConfig";
 
 
-function ShowTimingCard ({timing, format, price, config}: {timing:string, format: string, price: number, config: string}) {
+function ShowTimingCard ({timing, format, price, config, theatreId, movieId, showId}: {showId: string, timing:string, format: string, price: number, config: string, theatreId: string, movieId:string}) {
     const navigator = useNavigate()
     // const seatConfigurationData = processSeatConfig(config)
+    // console.log("showId from showTimingCard", showId)
 
     function onShowSelection () {
+        // console.log(movieId, theatreId)
         if(config)
-            navigator('/movie/seatSelection', {state: {config}})
+            navigator('/movie/seatSelection', {state: {config, timing, theatreId, movieId, price, showId}})
     }
     return (
         <div onClick={onShowSelection} className="cursor-pointer mx-2 my-2 group relative w-32 py-1 px-2 flex flex-col items-center justify-center text-sm text-green-400 rounded-lg border border-black">

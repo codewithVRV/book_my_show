@@ -10,6 +10,8 @@ type MovieShows = {
     timing: string,
     format: string,
     price: number,
+    theatreId: string,
+    movieId: string,
     noOfSeats: number,
     seatConfiguration: string,
 }
@@ -79,6 +81,8 @@ function MovieListing () {
                             timing: show.timing,
                             format: show.format,
                             price: show.price,
+                            movieId: show.movieId,
+                            theatreId: show.theatreId._id,
                             noOfSeats: show.noOfSeats,
                             seatConfiguration: show.seatConfiguration ? show.seatConfiguration : ""
                     })
@@ -92,6 +96,8 @@ function MovieListing () {
                             timing: show.timing,
                             format: show.format,
                             price: show.price,
+                            movieId: show.movieId,
+                            theatreId: show.theatreId._id,
                             noOfSeats: show.noOfSeats,
                             seatConfiguration: show.seatConfiguration ? show.seatConfiguration : ""
                         }]

@@ -3,6 +3,7 @@
 import {useEffect, useState} from 'react'
 import { useLocation } from "react-router-dom";
 
+import axiosInstance from '../../Config/AxiosInstance';
 import HomeLayout from "../../Layouts/HomeLayout";
 import processSeatConfig from '../../Utils/ProcessSeatConfig';
 
@@ -19,10 +20,45 @@ type Row = {
 
 type SeatState = Row[]
 
+
+type SelectedSeat = {
+    rowNumber: string,
+    seatNumber: number,
+}
+
 function SeatConfig () {
     const {state} = useLocation()
+    console.log(state)
+    console.log(state.showId)
     const [seats, setSeats] = useState<SeatState>([{number: "", seats : [{number: 0, status: 0}]}])
 
+    function onBooking () {
+        // console.log(seats)
+        const selectedSeats: SelectedSeat[]  = [];
+        seats.forEach((row:Row) => {
+            row.seats.forEach((currentSeat:Seat) => {
+                if(currentSeat.status === 3) {
+                    const newSelectedSeat : SelectedSeat = {rowNumber: row.number, seatNumber: currentSeat.number}
+                    selectedSeats.push(newSelectedSeat)
+                }
+            })
+        })
+        // console.log(selectedSeats)
+        const seatsJson = JSON.stringify(selectedSeats).replaceAll('"', "'")
+        axiosInstance.post('/mba/api/v1/bookings', {
+            seat: seatsJson,
+            movieId: state.movieId,
+            theatreId: state.theatreId,
+            noOfSeats: selectedSeats.length,
+            timing: state.timing,
+            price: state.price,
+            showId: state.showId,
+        }, {
+            headers:{
+                'x-access-token' : import.meta.env.VITE_ACCESS_TOKEN,
+            }
+        })
+    }
     function processSeatColor(seat: Seat) {
         if(seat.status == 0) return '';
         else if(seat.status == 1) return 'border border-green-300 hover:bg-green-300';
@@ -87,6 +123,9 @@ function SeatConfig () {
                     );
                 })
             }
+            <div>
+                <button onClick={onBooking} className='bg-red-500 px-4 py-2 font-semibold hover:bg-red-400 rounded-md text-white'>Create Booking</button>
+            </div>
          </div>
         </HomeLayout>
     )
