@@ -46,7 +46,7 @@ function SeatConfig () {
             })
         })
         // console.log(selectedSeats)
-        const seatsJson = JSON.stringify(selectedSeats).replaceAll('"', "'")
+        const seatsJson = JSON.stringify(selectedSeats).replace('"', "'")
         const response = await axiosInstance.post('/mba/api/v1/bookings', {
             seat: seatsJson,
             movieId: state.movieId,
