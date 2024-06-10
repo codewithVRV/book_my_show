@@ -1,4 +1,3 @@
-import './Navbar.css'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -61,7 +60,7 @@ function Navbar () {
                 
             </div>
 
-
+            {/* console.log("End here") */}
         </>
     )
 }
